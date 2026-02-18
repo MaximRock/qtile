@@ -8,4 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+
 config.py.backup.20260204_195229
+
+.vscode

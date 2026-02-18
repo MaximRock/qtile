@@ -57,6 +57,11 @@ def create_keys(mod: str, terminal: str | None = None) -> list[Key]:
     add([mod, "control"], "q", lazy.shutdown(), "Выход из Qtile")
     add(mod, "r", lazy.spawncmd(), "Запуск команды")
 
+    # apps
+    add(mod, "e", lazy.spawn("thunar"), "Thunar Файловый менеджер")
+    add(mod, "c", lazy.spawn("code"), "VsCode")
+    add(mod, "z", lazy.spawn("wezterm start -- yazi"), "Yazi Терминальный менеджер")
+
     return keys
 
 

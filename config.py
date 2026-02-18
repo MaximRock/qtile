@@ -12,6 +12,9 @@ from settings.autostart import Autostart
 from settings.keys import create_keys, create_group_keys
 from settings.groups import create_gpups
 from config_qtile.config_groups import default, work
+from config_qtile.theme.gruvbox import GruvboxTheme
+from settings.layouts import LayoutManager
+from settings.theme_controller import ThemeController
 
 # kb = Keybindings(mod="mod1")
 # keys: list = kb.get()
@@ -22,8 +25,19 @@ terminal: str | None = guess_terminal()
 keys = []
 keys += create_keys(mod=mod, terminal=terminal)
 
-groups = create_gpups(config_groups=work())
+groups: list[Group] = create_gpups(config_groups=work())
 keys += create_group_keys(mod=mod, groups=groups)
+
+theme = GruvboxTheme()
+layout_manager = LayoutManager()
+
+controller = ThemeController(
+    qtile=qtile,
+    layout_manager=layout_manager,
+    theme=theme,
+)
+
+layouts = layout_manager.build(theme)
 
 
 @hook.subscribe.startup_once
@@ -33,9 +47,9 @@ def start() -> None:
 
 @hook.subscribe.startup_once
 def autostart_apps() -> None:
-    qtile.cmd_spawn("wezterm")
-    qtile.cmd_spawn("code")
-    qtile.cmd_spawn("Throne")
+    qtile.spawn(terminal)
+    qtile.spawn("code")
+    # qtile.cmd_spawn("Throne")
 
 
 @hook.subscribe.startup_complete
@@ -53,48 +67,21 @@ for vt in range(1, 8):
         )
     )
 
-
-# groups = [Group(i) for i in "123456789"]
-
-# for i in groups:
-#     keys.extend(
-#         [
-#             # mod + group number = switch to group
-#             Key(
-#                 [kb.mod],
-#                 i.name,
-#                 lazy.group[i.name].toscreen(),
-#                 desc=f"Switch to group {i.name}",
-#             ),
-#             # mod + shift + group number = switch to & move focused window to group
-#             Key(
-#                 [kb.mod, "shift"],
-#                 i.name,
-#                 lazy.window.togroup(i.name, switch_group=True),
-#                 desc=f"Switch to & move focused window to group {i.name}",
-#             ),
-#             # Or, use below if you prefer not to switch to that group.
-#             # # mod + shift + group number = move focused window to group
-#             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-#             #     desc="move focused window to group {}".format(i.name)),
-#         ]
-#     )
-
-layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
-]
+# layouts = [
+#     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+#     layout.Max(),
+#     # Try more layouts by unleashing below layouts.
+#     # layout.Stack(num_stacks=2),
+#     # layout.Bsp(),
+#     # layout.Matrix(),
+#     # layout.MonadTall(),
+#     # layout.MonadWide(),
+#     # layout.RatioTile(),
+#     # layout.Tile(),
+#     # layout.TreeTab(),
+#     # layout.VerticalTile(),
+#     # layout.Zoomy(),
+# ]
 
 widget_defaults = dict(
     font="sans",
@@ -201,3 +188,30 @@ wl_xcursor_size = 24
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+
+# groups = [Group(i) for i in "123456789"]
+
+# for i in groups:
+#     keys.extend(
+#         [
+#             # mod + group number = switch to group
+#             Key(
+#                 [kb.mod],
+#                 i.name,
+#                 lazy.group[i.name].toscreen(),
+#                 desc=f"Switch to group {i.name}",
+#             ),
+#             # mod + shift + group number = switch to & move focused window to group
+#             Key(
+#                 [kb.mod, "shift"],
+#                 i.name,
+#                 lazy.window.togroup(i.name, switch_group=True),
+#                 desc=f"Switch to & move focused window to group {i.name}",
+#             ),
+#             # Or, use below if you prefer not to switch to that group.
+#             # # mod + shift + group number = move focused window to group
+#             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+#             #     desc="move focused window to group {}".format(i.name)),
+#         ]
+#     )
