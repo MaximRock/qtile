@@ -1,0 +1,54 @@
+[
+    {
+        "name": "GroupBox",
+        "config": {
+            "font": "Ubuntu",
+            "fontsize": 14,
+            "margin_x": 5,
+            "margin_y": 3,
+            "padding": 5,
+            "borderwidth": 2,
+            "active": "{active}",
+            "inactive": "{inactive}",
+            "highlight_method": "line",
+            "this_current_screen_border": "{this_current_screen_border}",
+            "disable_drag": false
+        }
+    },
+    {
+        "name": "Prompt",
+        "config": {
+            "font": "Ubuntu Mono",
+            "fontsize": 14,
+            "foreground": "{foreground}",
+            "background": "{background}",
+            "padding": 10
+        }
+    },
+    {
+        "name": "CurrentLayout",
+        "config": {
+            "font": "Ubuntu",
+            "fontsize": 14,
+            "padding": 10,
+            "foreground": "{foreground}"
+        }
+    },
+    {
+        "name": "Clock",
+        "config": {
+            "font": "Ubuntu Mono",
+            "fontsize": 14,
+            "format": "%Y-%m-%d %H:%M",
+            "padding": 10,
+            "foreground": "{foreground}"
+        }
+    },
+    {
+        "name": "CPU",
+        "config": {
+            "font":"Ubuntu Mono"
+        }
+    }
+
+]

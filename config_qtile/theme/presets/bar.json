@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Bar",
+        "config": {
+            "size": 24,
+            "opacity": 0.5,
+            "margin": [
+                1,
+                0,
+                0,
+                0
+            ],
+            "background": "{background}",
+            "border_width": 1,
+            "border_color": "{border_color}"
+        }
+    }
+]

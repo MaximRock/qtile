@@ -1,20 +1,20 @@
 import os
 
 import libqtile.resources
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
-
-from libqtile import hook
-from settings.autostart import Autostart
-from settings.keys import create_keys, create_group_keys
-from settings.groups import create_gpups
 from config_qtile.config_groups import default, work
-from config_qtile.theme.gruvbox import GruvboxTheme
-from settings.layouts import LayoutManager
+from settings.autostart import Autostart
+from settings.bar import BarManager
+from settings.groups import create_gpups
+from settings.keys import create_group_keys, create_keys
+from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
+
+THEME_COLOR = "gruvbox"  # "gruvbox" "catppuccin"
 
 # kb = Keybindings(mod="mod1")
 # keys: list = kb.get()
@@ -28,16 +28,25 @@ keys += create_keys(mod=mod, terminal=terminal)
 groups: list[Group] = create_gpups(config_groups=work())
 keys += create_group_keys(mod=mod, groups=groups)
 
-theme = GruvboxTheme()
-layout_manager = LayoutManager()
+tc = ThemeController(theme_color=THEME_COLOR)
 
-controller = ThemeController(
-    qtile=qtile,
-    layout_manager=layout_manager,
-    theme=theme,
-)
+lm = LayoutsManager(theme_controller=tc)
+layouts = lm.get_layouts()
 
-layouts = layout_manager.build(theme)
+screens: list[Screen] = [
+    Screen(top=BarManager(theme_controller=tc).init_bar())
+]
+
+# theme = GruvboxTheme()
+# layout_manager = LayoutManager()
+
+# controller = ThemeController(
+#     qtile=qtile,
+#     layout_manager=layout_manager,
+#     theme=theme,
+# )
+
+# layouts = layout_manager.build(theme)
 
 
 @hook.subscribe.startup_once
@@ -67,65 +76,51 @@ for vt in range(1, 8):
         )
     )
 
-# layouts = [
-#     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-#     layout.Max(),
-#     # Try more layouts by unleashing below layouts.
-#     # layout.Stack(num_stacks=2),
-#     # layout.Bsp(),
-#     # layout.Matrix(),
-#     # layout.MonadTall(),
-#     # layout.MonadWide(),
-#     # layout.RatioTile(),
-#     # layout.Tile(),
-#     # layout.TreeTab(),
-#     # layout.VerticalTile(),
-#     # layout.Zoomy(),
+
+
+# widget_defaults = dict(
+#     font="sans",
+#     fontsize=12,
+#     padding=3,
+# )
+# extension_defaults = widget_defaults.copy()
+
+# logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
+# screens = [
+#     Screen(
+#         bottom=bar.Bar(
+#             [
+#                 widget.CurrentLayout(),
+#                 widget.GroupBox(),
+#                 widget.Prompt(),
+#                 widget.WindowName(),
+#                 widget.Chord(
+#                     chords_colors={
+#                         "launch": ("#ff0000", "#ffffff"),
+#                     },
+#                     name_transform=lambda name: name.upper(),
+#                 ),
+#                 widget.TextBox("default config", name="default"),
+#                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+#                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+#                 # widget.StatusNotifier(),
+#                 widget.Systray(),
+#                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+#                 widget.QuickExit(),
+#             ],
+#             24,
+#             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+#             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+#         ),
+#         background="#000000",
+#         # wallpaper=logo,
+#         # wallpaper_mode="center",
+#         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
+#         # By default we handle these events delayed to already improve performance, however your system might still be struggling
+#         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
+#         # x11_drag_polling_rate = 60,
+#     ),
 # ]
-
-widget_defaults = dict(
-    font="sans",
-    fontsize=12,
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
-logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-        background="#000000",
-        # wallpaper=logo,
-        # wallpaper_mode="center",
-        # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-        # By default we handle these events delayed to already improve performance, however your system might still be struggling
-        # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-        # x11_drag_polling_rate = 60,
-    ),
-]
 
 # Drag floating layouts.
 mouse = [
@@ -215,3 +210,19 @@ wmname = "LG3D"
 #             #     desc="move focused window to group {}".format(i.name)),
 #         ]
 #     )
+
+# layouts = [
+#     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+#     layout.Max(),
+#     # Try more layouts by unleashing below layouts.
+#     # layout.Stack(num_stacks=2),
+#     # layout.Bsp(),
+#     # layout.Matrix(),
+#     # layout.MonadTall(),
+#     # layout.MonadWide(),
+#     # layout.RatioTile(),
+#     # layout.Tile(),
+#     # layout.TreeTab(),
+#     # layout.VerticalTile(),
+#     # layout.Zoomy(),
+# ]

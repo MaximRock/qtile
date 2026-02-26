@@ -44,6 +44,12 @@ def create_keys(mod: str, terminal: str | None = None) -> list[Key]:
     add(mod, "n", lazy.layout.normalize(), "Сброс размеров")
 
     # Запуск и управление
+    add(
+        ["control", "shift"],
+        "space",
+        lazy.widget["keyboardlayout"].next_keyboard(),
+        desc="Switch keyboard layout",
+    )
     add(mod, "space", lazy.next_layout(), "Следующий layout")  # Tab
     add(mod, "Return", lazy.spawn(terminal), "Терминал")
     add(mod, "q", lazy.window.kill(), "Закрыть окно")

@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Catppuccin",
+        "config": {
+            "background": "#1E1E2E",
+            "foreground": "#CDD6F4",
+            "accent": "#FAB387",
+            "active": "#F9E2AF",
+            "inactive": "#6C7086",
+            "border_focus": "#FAB387",
+            "border_normal": "#313244",
+            "widget_background": "#1E1E2E",
+            "widget_foreground": "#CDD6F4",
+            "this_current_screen_border": "#51c40e",
+            "border_color": "#083577"
+        }
+    }
+]

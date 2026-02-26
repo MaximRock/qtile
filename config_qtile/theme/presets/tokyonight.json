@@ -1,0 +1,9 @@
+{
+    "name": "tokyonight",
+    "background": "#1a1b26",
+    "foreground": "#c0caf5",
+    "active": "#7aa2f7",
+    "inactive": "#565f89",
+    "border_focus": "#bb9af7",
+    "border_normal": "#414868"
+}
