@@ -13,7 +13,6 @@ from settings.groups import create_gpups
 from settings.keys import create_group_keys, create_keys
 from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
-from settings.path import QtilePath
 from settings.screens import ScreenManager
 
 THEME_COLOR = "gruvbox"  # "gruvbox" "catppuccin"

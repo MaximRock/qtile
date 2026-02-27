@@ -12,3 +12,4 @@ wheels/
 config.py.backup.20260204_195229
 
 .vscode
+scr.py
