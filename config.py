@@ -13,6 +13,8 @@ from settings.groups import create_gpups
 from settings.keys import create_group_keys, create_keys
 from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
+from settings.path import QtilePath
+from settings.screens import ScreenManager
 
 THEME_COLOR = "gruvbox"  # "gruvbox" "catppuccin"
 
@@ -33,9 +35,23 @@ tc = ThemeController(theme_color=THEME_COLOR)
 lm = LayoutsManager(theme_controller=tc)
 layouts = lm.get_layouts()
 
-screens: list[Screen] = [
-    Screen(top=BarManager(theme_controller=tc).init_bar())
-]
+sm = ScreenManager(theme_controller=tc)
+
+screens: list[Screen] = sm.get_screens()
+
+# screens = create_screens(
+#     theme_controller=tc
+#     )
+
+# qt = QtilePath()
+
+# screens: list[Screen] = [
+#     Screen(
+#         top=BarManager(theme_controller=tc).init_bar(),
+#         wallpaper=qt.get("walls/vodoem.jpeg"),
+#         wallpaper_mode="center",
+#     )
+# ]
 
 # theme = GruvboxTheme()
 # layout_manager = LayoutManager()
@@ -49,9 +65,9 @@ screens: list[Screen] = [
 # layouts = layout_manager.build(theme)
 
 
-@hook.subscribe.startup_once
-def start() -> None:
-    Autostart().run()
+# @hook.subscribe.startup_once
+# def start() -> None:
+#     Autostart().run()
 
 
 @hook.subscribe.startup_once
@@ -75,7 +91,6 @@ for vt in range(1, 8):
             desc=f"Switch to VT{vt}",
         )
     )
-
 
 
 # widget_defaults = dict(

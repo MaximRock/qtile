@@ -8,7 +8,8 @@ class ThemeController:
     def __init__(self, theme_color: str) -> None:
         print(f"🎨 ThemeController инициализируется с темой: {theme_color}")
         self.qp = QtilePath()
-        self.theme_path: Path = self.qp.get("config_qtile/theme/presets")
+        self.theme_path: Path = self.qp.get("config_qtile/theme/settings_json")
+        self.theme_color_path: Path = self.qp.get("config_qtile/theme/presets")
 
         self.theme_name_layouts = "layouts"
         self.theme_name_widgets = "widgets"
@@ -40,7 +41,7 @@ class ThemeController:
 
     # 👇 отдельная загрузка цвета (возвращает dict, НЕ list)
     def _load_theme_color(self) -> dict:
-        theme_file: Path = self.theme_path / f"{self.theme_name_color}.json"
+        theme_file: Path = self.theme_color_path / f"{self.theme_name_color}.json"
 
         with open(theme_file) as f:
             data = json.load(f)
