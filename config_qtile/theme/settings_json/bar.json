@@ -2,7 +2,7 @@
     {
         "name": "Bar",
         "config": {
-            "size": 24,
+            "size": "{bar_size}",
             "opacity": 0.5,
             "margin": [
                 1,

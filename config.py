@@ -15,7 +15,7 @@ from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
 from settings.screens import ScreenManager
 
-THEME_COLOR = "gruvbox"  # "gruvbox" "catppuccin"
+THEME_COLOR = "catppuccin"  # "gruvbox" "c"
 
 # kb = Keybindings(mod="mod1")
 # keys: list = kb.get()

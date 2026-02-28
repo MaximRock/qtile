@@ -1,46 +1,96 @@
-from libqtile import widget
+# settings/widgets.py
 
-from config_qtile.theme.theme_model import Theme
-from settings.base_factory import BaseFactory
+from libqtile import widget
 from settings.theme_controller import ThemeController
+from settings.base_factory import BaseFactory
 
 
 class WidgetManager:
     def __init__(self, theme_controller: ThemeController = None) -> None:
-        self.tc = theme_controller
-        themes: list[Theme] = self.tc.get_theme_widgets()
-        colors: dict = self.tc.get_theme_color()
+        self.tc = theme_controller or ThemeController()
+        self.colors = self.tc.get_theme_color()
+        self.settings = self.tc.get_theme_settings()
 
+        themes = self.tc.get_theme_widgets()
+
+        # ✅ Правильные имена классов виджетов
         classes = {
             "GroupBox": widget.GroupBox,
-            "Prompt": widget.Prompt,
-            "CurrentLayout": widget.CurrentLayout,
             "Clock": widget.Clock,
-            "keyboardlayout": widget.KeyboardLayout,
+            "WindowName": widget.WindowName,
+            "KeyboardLayout": widget.KeyboardLayout,
             "Spacer": widget.Spacer,
             "Systray": widget.Systray,
+            "CurrentLayout": widget.CurrentLayout,
+            "Prompt": widget.Prompt,
             "CPU": widget.CPU,
             "Memory": widget.Memory,
             "Net": widget.Net,
             "Volume": widget.Volume,
             "Battery": widget.Battery,
-            "WindowName": widget.WindowName,
             "TextBox": widget.TextBox,
         }
 
-        fallback = [
-            widget.GroupBox(),
-            widget.Prompt(),
-            widget.CurrentLayout(),
-            widget.Clock(format="%H:%M"),
-        ]
+        fallback = [widget.GroupBox(), widget.Clock()]
 
         self.factory = BaseFactory(
-            themes=themes, classes=classes, fallback=fallback, colors=colors
+            themes=themes,
+            classes=classes,
+            fallback=fallback,
+            colors=self.colors,
+            settings=self.settings,
         )
 
     def get_widget(self):
         return self.factory.build()
+
+
+
+
+
+# from libqtile import widget
+
+# from config_qtile.theme.theme_model import Theme
+# from settings.base_factory import BaseFactory
+# from settings.theme_controller import ThemeController
+
+
+# class WidgetManager:
+#     def __init__(self, theme_controller: ThemeController = None) -> None:
+#         self.tc = theme_controller
+#         themes: list[Theme] = self.tc.get_theme_widgets()
+#         colors: dict = self.tc.get_theme_color()
+
+#         classes = {
+#             "GroupBox": widget.GroupBox,
+#             "Prompt": widget.Prompt,
+#             "CurrentLayout": widget.CurrentLayout,
+#             "Clock": widget.Clock,
+#             "keyboardlayout": widget.KeyboardLayout,
+#             "Spacer": widget.Spacer,
+#             "Systray": widget.Systray,
+#             "CPU": widget.CPU,
+#             "Memory": widget.Memory,
+#             "Net": widget.Net,
+#             "Volume": widget.Volume,
+#             "Battery": widget.Battery,
+#             "WindowName": widget.WindowName,
+#             "TextBox": widget.TextBox,
+#         }
+
+#         fallback = [
+#             widget.GroupBox(),
+#             widget.Prompt(),
+#             widget.CurrentLayout(),
+#             widget.Clock(format="%H:%M"),
+#         ]
+
+#         self.factory = BaseFactory(
+#             themes=themes, classes=classes, fallback=fallback, colors=colors
+#         )
+
+#     def get_widget(self):
+#         return self.factory.build()
 
     # def get_widget(self):
     #     fallback = [

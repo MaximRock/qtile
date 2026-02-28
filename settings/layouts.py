@@ -1,3 +1,5 @@
+# settings/layouts.py
+
 from libqtile import layout
 from settings.theme_controller import ThemeController
 from settings.base_factory import BaseFactory
@@ -5,24 +7,62 @@ from settings.base_factory import BaseFactory
 
 class LayoutsManager:
     def __init__(self, theme_controller: ThemeController = None) -> None:
-        self.tc = theme_controller
-        themes = self.tc.get_theme_layouts()
-        colors = self.tc.get_theme_color()
+        self.tc = theme_controller or ThemeController()
+        self.colors = self.tc.get_theme_color()
+        self.settings = self.tc.get_theme_settings()
 
-        classes: dict[str, object] = {
+        # ✅ Правильные имена классов layout
+        classes = {
+            "MonadTall": layout.MonadTall,
             "Max": layout.Max,
             "Columns": layout.Columns,
-            "Floating": layout.Floating,
-            "Tile": layout.Tile,
-            "Bsp": layout.Bsp,
+            "Tile": layout.Tile,  # ✅ Это layout!
+            "Bsp": layout.Bsp,  # ✅ Это layout!
+            "Stack": layout.Stack,
         }
 
-        fallback = [layout.Max()]
-        self.factory = BaseFactory(
-            themes=themes, classes=classes, fallback=fallback, colors=colors)
+        fallback = [layout.MonadTall(border_width=2), layout.Max()]
 
-    def get_layouts(self):
+        self.factory = BaseFactory(
+            themes=self.tc.get_theme_layouts(),
+            classes=classes,
+            fallback=fallback,
+            colors=self.colors,
+            settings=self.settings,
+        )
+
+    def get_layouts(self) -> list:
         return self.factory.build()
+
+
+
+
+# from libqtile import layout
+# from settings.theme_controller import ThemeController
+# from settings.base_factory import BaseFactory
+
+
+# class LayoutsManager:
+#     def __init__(self, theme_controller: ThemeController = None) -> None:
+#         self.tc = theme_controller
+#         themes = self.tc.get_theme_layouts()
+#         colors = self.tc.get_theme_color()
+        
+
+#         classes: dict[str, object] = {
+#             "Max": layout.Max,
+#             "Columns": layout.Columns,
+#             "Floating": layout.Floating,
+#             "Tile": layout.Tile,
+#             "Bsp": layout.Bsp,
+#         }
+
+#         fallback = [layout.Max()]
+#         self.factory = BaseFactory(
+#             themes=themes, classes=classes, fallback=fallback, colors=colors)
+
+#     def get_layouts(self):
+#         return self.factory.build()
 
 
     # def get_layouts(self):

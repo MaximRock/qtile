@@ -3,10 +3,10 @@
         "name": "GroupBox",
         "config": {
             "font": "Ubuntu",
-            "fontsize": 14,
+            "fontsize": "{fontsize}",
             "margin_x": 5,
             "margin_y": 3,
-            "padding": 5,
+            "padding": "{padding}",
             "borderwidth": 2,
             "active": "{active}",
             "inactive": "{inactive}",
@@ -18,7 +18,7 @@
     {
         "name": "Prompt",
         "config": {
-            "font": "Ubuntu Mono",
+            "font": "Ubuntu",
             "fontsize": 14,
             "foreground": "{foreground}",
             "background": "{background}",
@@ -28,8 +28,8 @@
     {
         "name": "CurrentLayout",
         "config": {
-            "font": "Ubuntu",
-            "fontsize": 14,
+            "font": "{font}",
+            "fontsize": "{fontsize}",
             "padding": 10,
             "foreground": "{foreground}"
         }
@@ -37,7 +37,7 @@
     {
         "name": "Clock",
         "config": {
-            "font": "Ubuntu Mono",
+            "font": "{font}",
             "fontsize": 14,
             "format": "%Y-%m-%d %H:%M",
             "padding": 10,
@@ -47,7 +47,7 @@
     {
         "name": "CPU",
         "config": {
-            "font":"Ubuntu Mono"
+            "font":"{font}"
         }
     }
 
