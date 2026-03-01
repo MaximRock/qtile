@@ -12,7 +12,8 @@
             "widget_background": "#282828",
             "widget_foreground": "#ebdbb2",
             "this_current_screen_border": "#c4990e",
-            "border_color": "#774b08"
+            "border_color": "#774b08",
+            "separator_color": "#4b4441"
         }
     }
 ]

@@ -2,11 +2,11 @@
     {
         "name": "GroupBox",
         "config": {
-            "font": "Ubuntu",
+            "font": "{font}",
             "fontsize": "{fontsize}",
             "margin_x": 5,
             "margin_y": 3,
-            "padding": "{padding}",
+            "padding": "{padding_groupbox}",
             "borderwidth": 2,
             "active": "{active}",
             "inactive": "{inactive}",
@@ -18,11 +18,20 @@
     {
         "name": "Prompt",
         "config": {
-            "font": "Ubuntu",
-            "fontsize": 14,
+            "font": "{font}",
+            "fontsize": "{fontsize}",
             "foreground": "{foreground}",
             "background": "{background}",
             "padding": 10
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
         }
     },
     {
@@ -30,25 +39,100 @@
         "config": {
             "font": "{font}",
             "fontsize": "{fontsize}",
-            "padding": 10,
+            "padding": "{padding}",
             "foreground": "{foreground}"
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
         }
     },
     {
         "name": "Clock",
         "config": {
             "font": "{font}",
-            "fontsize": 14,
+            "fontsize": "{fontsize}",
             "format": "%Y-%m-%d %H:%M",
-            "padding": 10,
+            "padding": "{padding}",
             "foreground": "{foreground}"
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
+        }
+    },
+    {
+        "name": "Spacer",
+        "config": {}
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
         }
     },
     {
         "name": "CPU",
         "config": {
-            "font":"{font}"
+            "font": "{font}",
+            "fontsize": "{fontsize}",
+            "padding": "{padding}",
+            "foreground": "{foreground}",
+            "background": "{background}"
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
+        }
+    },
+    {
+        "name": "HDD",
+        "config": {
+            "font": "{font}",
+            "fontsize": "{fontsize}",
+            "padding": "{padding}",
+            "foreground": "{foreground}",
+            "background": "{background}"
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
+        }
+    },
+    {
+        "name": "Memory",
+        "config":{
+            "font": "{font}",
+            "fontsize": "{fontsize}",
+            "padding": "{padding}",
+            "foreground": "{foreground}",
+            "background": "{background}",
+            "format": "Mem: {MemUsed:.1f}{mm}{MemPercent:>5.1f}%",
+            "measure_mem": "G",
+            "update_interval": 2.0
         }
     }
-
 ]

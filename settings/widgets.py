@@ -24,11 +24,13 @@ class WidgetManager:
             "CurrentLayout": widget.CurrentLayout,
             "Prompt": widget.Prompt,
             "CPU": widget.CPU,
+            "HDD": widget.HDD,
             "Memory": widget.Memory,
             "Net": widget.Net,
             "Volume": widget.Volume,
             "Battery": widget.Battery,
             "TextBox": widget.TextBox,
+            "Sep": widget.Sep,
         }
 
         fallback = [widget.GroupBox(), widget.Clock()]
@@ -43,9 +45,6 @@ class WidgetManager:
 
     def get_widget(self):
         return self.factory.build()
-
-
-
 
 
 # from libqtile import widget
@@ -92,22 +91,22 @@ class WidgetManager:
 #     def get_widget(self):
 #         return self.factory.build()
 
-    # def get_widget(self):
-    #     fallback = [
-    #         widget.GroupBox(),
-    #         widget.Prompt(),
-    #         widget.CurrentLayout(),
-    #         widget.Clock(format="%H:%M"),
-    #     ]
+# def get_widget(self):
+#     fallback = [
+#         widget.GroupBox(),
+#         widget.Prompt(),
+#         widget.CurrentLayout(),
+#         widget.Clock(format="%H:%M"),
+#     ]
 
-    #     widgets = []
+#     widgets = []
 
-    #     for item in self.themes:
-    #         cls = self.classes.get(item.name)
-    #         if cls:
-    #             widgets.append(cls(**item.config))
+#     for item in self.themes:
+#         cls = self.classes.get(item.name)
+#         if cls:
+#             widgets.append(cls(**item.config))
 
-    #     return widgets if widgets else fallback
+#     return widgets if widgets else fallback
 
 
 # from libqtile import widget
