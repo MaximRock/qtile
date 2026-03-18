@@ -1,4 +1,4 @@
-from libqtile.config import Key, Group
+from libqtile.config import Group, Key
 from libqtile.lazy import lazy
 
 
@@ -67,6 +67,27 @@ def create_keys(mod: str, terminal: str | None = None) -> list[Key]:
     add(mod, "e", lazy.spawn("thunar"), "Thunar Файловый менеджер")
     add(mod, "c", lazy.spawn("code"), "VsCode")
     add(mod, "z", lazy.spawn("wezterm start -- yazi"), "Yazi Терминальный менеджер")
+    add(mod, "b", lazy.spawn("yandex-browser-stable"), "Яндекс браузер")
+
+    # rofi
+    add(mod, "d", lazy.spawn("rofi -show drun"), "запуск rofi")
+    add(mod, "p", lazy.spawn("rofi -show power-menu"), "запуск rofi power-menu")
+
+    # flameshot
+    add(
+        mod,
+        "o",
+        lazy.spawn("flameshot gui"),
+        "захват с помощью графического интерфейса",
+    )
+    add(
+        [mod, "shift"],
+        "o",
+        lazy.spawn("flameshot full"),
+        "Полноэкранная съемка (с запросом пути сохранения)n",
+    )
+
+    add([], "F12", lazy.spawn("/home/max/.config/qtile/modules/power_menu/main.py")),
 
     return keys
 

@@ -1,0 +1,30 @@
+{
+    "bindings": [
+        {
+            "type": "drag",
+            "modifiers": [
+                "mod1"
+            ],
+            "button": "Button1",
+            "lazy": "window.set_position_floating",
+            "start": "window.get_position"
+        },
+        {
+            "type": "drag",
+            "modifiers": [
+                "mod1"
+            ],
+            "button": "Button3",
+            "lazy": "window.set_size_floating",
+            "start": "window.get_size"
+        },
+        {
+            "type": "click",
+            "modifiers": [
+                "mod1"
+            ],
+            "button": "Button2",
+            "lazy": "window.bring_to_front"
+        }
+    ]
+}

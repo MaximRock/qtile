@@ -14,13 +14,20 @@ from settings.keys import create_group_keys, create_keys
 from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
 from settings.screens import ScreenManager
+from settings.mouse import load_mouse
+from settings.loger import get_logger
+from constants import THEME_COLOR, MOD_KEY
 
-THEME_COLOR = "catppuccin"  # "gruvbox" "c"
+logger = get_logger("qtile.qtile_startup", file="qtile_startup")
+logger.info("Qtile config started")
+
+
+THEME_COLOR = THEME_COLOR #"catppuccin"  # "gruvbox" ""
 
 # kb = Keybindings(mod="mod1")
 # keys: list = kb.get()
 
-mod = "mod1"
+mod = MOD_KEY #"mod1"
 terminal: str | None = guess_terminal()
 
 keys = []
@@ -38,30 +45,8 @@ sm = ScreenManager(theme_controller=tc)
 
 screens: list[Screen] = sm.get_screens()
 
-# screens = create_screens(
-#     theme_controller=tc
-#     )
+mouse = load_mouse()
 
-# qt = QtilePath()
-
-# screens: list[Screen] = [
-#     Screen(
-#         top=BarManager(theme_controller=tc).init_bar(),
-#         wallpaper=qt.get("walls/vodoem.jpeg"),
-#         wallpaper_mode="center",
-#     )
-# ]
-
-# theme = GruvboxTheme()
-# layout_manager = LayoutManager()
-
-# controller = ThemeController(
-#     qtile=qtile,
-#     layout_manager=layout_manager,
-#     theme=theme,
-# )
-
-# layouts = layout_manager.build(theme)
 
 
 # @hook.subscribe.startup_once
@@ -92,66 +77,24 @@ for vt in range(1, 8):
     )
 
 
-# widget_defaults = dict(
-#     font="sans",
-#     fontsize=12,
-#     padding=3,
-# )
-# extension_defaults = widget_defaults.copy()
 
-# logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
-# screens = [
-#     Screen(
-#         bottom=bar.Bar(
-#             [
-#                 widget.CurrentLayout(),
-#                 widget.GroupBox(),
-#                 widget.Prompt(),
-#                 widget.WindowName(),
-#                 widget.Chord(
-#                     chords_colors={
-#                         "launch": ("#ff0000", "#ffffff"),
-#                     },
-#                     name_transform=lambda name: name.upper(),
-#                 ),
-#                 widget.TextBox("default config", name="default"),
-#                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-#                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-#                 # widget.StatusNotifier(),
-#                 widget.Systray(),
-#                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-#                 widget.QuickExit(),
-#             ],
-#             24,
-#             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-#             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-#         ),
-#         background="#000000",
-#         # wallpaper=logo,
-#         # wallpaper_mode="center",
-#         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
-#         # By default we handle these events delayed to already improve performance, however your system might still be struggling
-#         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
-#         # x11_drag_polling_rate = 60,
+
+# # Drag floating layouts.
+# mouse = [
+#     Drag(
+#         [mod],
+#         "Button1",
+#         lazy.window.set_position_floating(),
+#         start=lazy.window.get_position(),
 #     ),
+#     Drag(
+#         [mod],
+#         "Button3",
+#         lazy.window.set_size_floating(),
+#         start=lazy.window.get_size(),
+#     ),
+#     Click([mod], "Button2", lazy.window.bring_to_front()),
 # ]
-
-# Drag floating layouts.
-mouse = [
-    Drag(
-        [mod],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [mod],
-        "Button3",
-        lazy.window.set_size_floating(),
-        start=lazy.window.get_size(),
-    ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -169,6 +112,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="tk"),
     ]
 )
 
@@ -239,4 +183,47 @@ wmname = "LG3D"
 #     # layout.TreeTab(),
 #     # layout.VerticalTile(),
 #     # layout.Zoomy(),
+# ]
+# widget_defaults = dict(
+#     font="sans",
+#     fontsize=12,
+#     padding=3,
+# )
+# extension_defaults = widget_defaults.copy()
+
+# logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
+# screens = [
+#     Screen(
+#         bottom=bar.Bar(
+#             [
+#                 widget.CurrentLayout(),
+#                 widget.GroupBox(),
+#                 widget.Prompt(),
+#                 widget.WindowName(),
+#                 widget.Chord(
+#                     chords_colors={
+#                         "launch": ("#ff0000", "#ffffff"),
+#                     },
+#                     name_transform=lambda name: name.upper(),
+#                 ),
+#                 widget.TextBox("default config", name="default"),
+#                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
+#                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+#                 # widget.StatusNotifier(),
+#                 widget.Systray(),
+#                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+#                 widget.QuickExit(),
+#             ],
+#             24,
+#             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+#             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+#         ),
+#         background="#000000",
+#         # wallpaper=logo,
+#         # wallpaper_mode="center",
+#         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
+#         # By default we handle these events delayed to already improve performance, however your system might still be struggling
+#         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
+#         # x11_drag_polling_rate = 60,
+#     ),
 # ]

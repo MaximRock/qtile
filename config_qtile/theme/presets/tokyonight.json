@@ -1,9 +1,19 @@
-{
-    "name": "tokyonight",
-    "background": "#1a1b26",
-    "foreground": "#c0caf5",
-    "active": "#7aa2f7",
-    "inactive": "#565f89",
-    "border_focus": "#bb9af7",
-    "border_normal": "#414868"
-}
+[
+    {
+        "name": "Tokyonight",
+        "config": {
+            "background": "#1a1b26",
+            "foreground": "#c0caf5",
+            "accent": "#bb9af7",
+            "active": "#7aa2f7",
+            "inactive": "#565f89",
+            "border_focus": "#bb9af7",
+            "border_normal": "#3b4261",
+            "widget_background": "#1a1b26",
+            "widget_foreground": "#c0caf5",
+            "this_current_screen_border": "#e0af68",
+            "border_color": "#9d7cd8",
+            "separator_color": "#364a82"
+        }
+    }
+]

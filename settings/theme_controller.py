@@ -22,22 +22,22 @@ class ThemeController:
         self.theme_name_bar = "bar"
         self.theme_name_color: str = theme_color
 
-        # ✅ Загружаем общие настройки
+        # Загружаем общие настройки
         self.theme_settings: dict = self._load_theme_settings()
 
-        # ✅ Загружаем конфигурации (методы должны существовать!)
+        # Загружаем конфигурации (методы должны существовать!)
         self.theme_layouts: list[Theme] = self._load_theme_layouts()
         self.theme_widgets: list[Theme] = self._load_theme_widgets()
         self.theme_bar: list[Theme] = self._load_theme_bar()
 
-        # ✅ Загружаем цвета
+        # Загружаем цвета
         self.theme_color: dict = self._load_theme_color()
 
     def _load_theme_settings(self) -> dict:
         """Загружает общие настройки из base.json"""
         theme_file: Path = self.theme_path / "base.json"
         try:
-            with open(theme_file, "r", encoding="utf-8") as f:
+            with open(theme_file, encoding="utf-8") as f:
                 data = json.load(f)
             print(f"✅ Загружены настройки: {theme_file}")
             return data
@@ -51,7 +51,7 @@ class ThemeController:
         themes = []
 
         try:
-            with open(theme_file, "r", encoding="utf-8") as f:
+            with open(theme_file, encoding="utf-8") as f:
                 data = json.load(f)
                 for item in data:
                     definition = Theme(
@@ -65,15 +65,15 @@ class ThemeController:
         return themes
 
     def _load_theme_layouts(self) -> list[Theme]:
-        """✅ Метод должен существовать!"""
+        """Метод должен существовать!"""
         return self._load(self.theme_name_layouts)
 
     def _load_theme_widgets(self) -> list[Theme]:
-        """✅ Метод должен существовать!"""
+        """Метод должен существовать!"""
         return self._load(self.theme_name_widgets)
 
     def _load_theme_bar(self) -> list[Theme]:
-        """✅ Метод должен существовать!"""
+        """Метод должен существовать!"""
         return self._load(self.theme_name_bar)
 
     def _load_theme_color(self) -> dict:

@@ -1,8 +1,7 @@
-# settings/widgets.py
-
 from libqtile import widget
-from settings.theme_controller import ThemeController
+
 from settings.base_factory import BaseFactory
+from settings.theme_controller import ThemeController
 
 
 class WidgetManager:
@@ -13,7 +12,6 @@ class WidgetManager:
 
         themes = self.tc.get_theme_widgets()
 
-        # ✅ Правильные имена классов виджетов
         classes = {
             "GroupBox": widget.GroupBox,
             "Clock": widget.Clock,

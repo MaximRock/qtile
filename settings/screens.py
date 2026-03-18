@@ -46,12 +46,12 @@ class ScreenManager:
         try:
             with open(config_path, "r", encoding="utf-8") as f:
                 self._config = json.load(f)
-            print(f"✅ Загружен конфиг экранов: {config_path}")
+            print(f"Загружен конфиг экранов: {config_path}")
         except FileNotFoundError:
-            print(f"⚠️ Файл не найден: {config_path}")
+            print(f"Файл не найден: {config_path}")
             self._config = {}
         except json.JSONDecodeError as e:
-            print(f"❌ Ошибка JSON в {config_path}: {e}")
+            print(f"Ошибка JSON в {config_path}: {e}")
             self._config = {}
 
     def _create_screens(self) -> None:
@@ -60,17 +60,17 @@ class ScreenManager:
             bar_manager: BarManager = BarManager(theme_controller=self.tc)
             top_bar = bar_manager.init_bar()
 
-            # ✅ Обои: из конфига или из settings
+            # Обои: из конфига или из settings
             wallpaper_name = self._config.get(
                 "wallpaper", self.settings.get("wallpaper", "vodoem")
             )
 
-            # ✅ Расширение: из конфига или из settings
+            # Расширение: из конфига или из settings
             wallpaper_ext = self._config.get(
                 "wallpaper_ext", self.settings.get("wallpaper_ext", ".jpeg")
             )
 
-            # ✅ Добавляем точку если нет
+            # Добавляем точку если нет
             if not wallpaper_ext.startswith("."):
                 wallpaper_ext = f".{wallpaper_ext}"
 
@@ -78,7 +78,7 @@ class ScreenManager:
                 f"{self.walls_dir}/{wallpaper_name}{wallpaper_ext}"
             )
 
-            # ✅ Режим: из конфига или из settings
+            # Режим: из конфига или из settings
             wallpaper_mode = self._config.get(
                 "wallpaper_mode", self.settings.get("wallpaper_mode", "center")
             )

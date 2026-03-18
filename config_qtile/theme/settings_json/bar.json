@@ -3,7 +3,7 @@
         "name": "Bar",
         "config": {
             "size": "{bar_size}",
-            "opacity": 0.5,
+            "opacity": 0.9,
             "margin": [
                 1,
                 0,
