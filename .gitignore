@@ -13,3 +13,8 @@ config.py.backup.20260204_195229
 
 .vscode
 scr.py
+
+modules/power_menu/power_menu/main1.py
+modules/power_menu/power_menu/color.py
+
+command.txt

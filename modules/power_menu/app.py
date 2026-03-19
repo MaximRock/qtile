@@ -7,7 +7,7 @@ from colors.tokyonight import tokyonight
 from config_pm.config_button import ButtonConfig, create_button_config
 from config_pm.frame_config import BUTTON_FRAME, HEADER_FRAME, FrameConfig
 from config_pm.image_config import ImageConfig, get_icon
-from config_pm.label_config import TITLE_LABEL
+from config_pm.label_config import LabelConfig, create_label_config
 from widgets.button import Button
 from widgets.frame import Frame
 from widgets.image import AppImage
@@ -83,13 +83,35 @@ class Application(ctk.CTk, BaseWindow):
         self.button_frame: Frame = self.create_frame_from_config(self, BUTTON_FRAME)
 
     def create_labels(self) -> None:
-        self.title_label = Label(
-            self.header_frame,
-            text=TITLE_LABEL.text,
-            font=TITLE_LABEL.font,
-            text_color=self.current_theme["text"]["primary"],
+        title_config = create_label_config(
+            theme=self.current_theme,
+            text="Power Menu",
         )
-        self.title_label.pack(expand=True, fill="both")
+
+        self.title_label = self._create_label_from_config(
+            self.header_frame,
+            title_config
+        )
+
+    def _create_label_from_config(self, parent, config: LabelConfig) -> Label:
+        label = Label(
+            parent,
+            text=config.text,
+            font=config.font,
+            text_color=config.text_color,
+        )
+        label.pack(expand=True, fill="both")
+        return label
+
+
+    # def create_labels(self) -> None:
+    #     self.title_label = Label(
+    #         self.header_frame,
+    #         text=TITLE_LABEL.text,
+    #         font=TITLE_LABEL.font,
+    #         text_color=TITLE_LABEL.text_color,
+    #     )
+    #     self.title_label.pack(expand=True, fill="both")
 
     def create_buttons(self) -> None:
         lock_config: ButtonConfig = create_button_config(

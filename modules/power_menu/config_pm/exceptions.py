@@ -23,6 +23,18 @@ class ButtonConfigError(ConfigError):
 
 
 class FrameConfigError(ConfigError):
-    "Ошибка в конфигурации frame"
+    """Ошибка в конфигурации frame"""
+
+    pass
+
+
+class LabelConfigError(ConfigError):
+    """Ошибка в конфигурации label"""
+
+    pass
+
+
+class ImageConfigError(ConfigError):
+    """ошибка в конфигурации image"""
 
     pass
