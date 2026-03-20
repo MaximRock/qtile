@@ -38,3 +38,21 @@ class ImageConfigError(ConfigError):
     """ошибка в конфигурации image"""
 
     pass
+
+
+class WindowConfigError(ConfigError):
+    """Ошибка в конфигурации window"""
+
+    pass
+
+
+class WidgetsError(PowerMenuError):
+    """Ошибки в конфигурации widgets"""
+
+    pass
+
+
+class ButtonWidgetsError(WidgetsError):
+    """Ошибка в конфигурации button widget"""
+
+    pass

@@ -97,10 +97,3 @@ def create_label_config(
         )
     except Exception as e:
         raise ConfigError("Ошибка конфигурации label") from e
-
-
-# TITLE_LABEL: LabelConfig = create_label_config(
-#     theme={"text": {"primary": "#eceff4"}},
-#     text="Power Menu",
-#     font=("Jetbrains Mono", 24),
-# )

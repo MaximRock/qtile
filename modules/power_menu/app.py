@@ -8,6 +8,7 @@ from config_pm.config_button import ButtonConfig, create_button_config
 from config_pm.frame_config import BUTTON_FRAME, HEADER_FRAME, FrameConfig
 from config_pm.image_config import ImageConfig, get_icon
 from config_pm.label_config import LabelConfig, create_label_config
+from config_pm.window_config import POWER_MENU_WINDOW, WindowConfig
 from widgets.button import Button
 from widgets.frame import Frame
 from widgets.image import AppImage
@@ -22,8 +23,8 @@ class Application(ctk.CTk, BaseWindow):
     def __init__(self) -> None:
         super().__init__()
         self.qp: Path = QtilePath()
-        self.geometry("600x250")
-        self.resizable(False, False)
+        self.config: WindowConfig = POWER_MENU_WINDOW
+        self.setup_geometry(self, config=self.config)
         self.themes: dict[str, dict[str, dict[str, str]]] = {
             "catppuccin": catppuccin,
             "gruvbox": gruvbox,
@@ -38,7 +39,7 @@ class Application(ctk.CTk, BaseWindow):
         self.create_labels()
         self.create_buttons()
 
-        self.setup_window(self, escape=True, focus=True)
+        self.setup_window(self, config=self.config)
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
@@ -89,8 +90,7 @@ class Application(ctk.CTk, BaseWindow):
         )
 
         self.title_label = self._create_label_from_config(
-            self.header_frame,
-            title_config
+            self.header_frame, title_config
         )
 
     def _create_label_from_config(self, parent, config: LabelConfig) -> Label:
@@ -102,16 +102,6 @@ class Application(ctk.CTk, BaseWindow):
         )
         label.pack(expand=True, fill="both")
         return label
-
-
-    # def create_labels(self) -> None:
-    #     self.title_label = Label(
-    #         self.header_frame,
-    #         text=TITLE_LABEL.text,
-    #         font=TITLE_LABEL.font,
-    #         text_color=TITLE_LABEL.text_color,
-    #     )
-    #     self.title_label.pack(expand=True, fill="both")
 
     def create_buttons(self) -> None:
         lock_config: ButtonConfig = create_button_config(
@@ -156,9 +146,15 @@ class Application(ctk.CTk, BaseWindow):
 
         # Создаём кнопки: frame + config + grid
         self.button_lock: Button = self._create_button(self.button_frame, lock_config)
-        self.button_reboot: Button = self._create_button(self.button_frame, reboot_config)
-        self.button_poweroff: Button = self._create_button(self.button_frame, poweroff_config)
-        self.button_logout: Button = self._create_button(self.button_frame, logout_config)
+        self.button_reboot: Button = self._create_button(
+            self.button_frame, reboot_config
+        )
+        self.button_poweroff: Button = self._create_button(
+            self.button_frame, poweroff_config
+        )
+        self.button_logout: Button = self._create_button(
+            self.button_frame, logout_config
+        )
 
     def _create_button(self, parent_frame, config: ButtonConfig) -> Button:
         """Создать кнопку из конфига с frame и grid"""
