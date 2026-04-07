@@ -1,0 +1,17 @@
+{
+    "dgroups_key_binder": null,
+    "dgroups_app_rules": [],
+    "follow_mouse_focus": true,
+    "bring_front_click": false,
+    "floats_kept_above": true,
+    "cursor_warp": false,
+    "auto_fullscreen": true,
+    "focus_on_window_activation": "smart",
+    "focus_previous_on_window_remove": false,
+    "reconfigure_screens": true,
+    "auto_minimize": true,
+    "wl_input_rules": null,
+    "wl_xcursor_theme": null,
+    "wl_xcursor_size": 24,
+    "wmname": "LG3D"
+}

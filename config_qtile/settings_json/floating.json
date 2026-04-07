@@ -1,0 +1,31 @@
+{
+    "floating": {
+        "float_rules": [
+            {
+                "wm_class": "confirmreset"
+            },
+            {
+                "wm_class": "makebranch"
+            },
+            {
+                "wm_class": "maketag"
+            },
+            {
+                "wm_class": "ssh-askpass"
+            },
+            {
+                "title": "branchdialog"
+            },
+            {
+                "title": "pinentry"
+            },
+            {
+                "title": "tk"
+            }
+        ],
+        "default_float_rules": true,
+        "border_width": 2,
+        "border_focus": "{border_focus}",
+        "border_normal": "{border_normal}"
+    }
+}

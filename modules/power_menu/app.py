@@ -84,12 +84,12 @@ class Application(ctk.CTk, BaseWindow):
         self.button_frame: Frame = self.create_frame_from_config(self, BUTTON_FRAME)
 
     def create_labels(self) -> None:
-        title_config = create_label_config(
+        title_config: LabelConfig = create_label_config(
             theme=self.current_theme,
             text="Power Menu",
         )
 
-        self.title_label = self._create_label_from_config(
+        self.title_label: Label = self._create_label_from_config(
             self.header_frame, title_config
         )
 

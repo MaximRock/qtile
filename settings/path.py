@@ -30,6 +30,6 @@ class QtilePath:
         Returns:
             Path объект (директория создана)
         """
-        path = self.get(subpath)
+        path: Path = self.get(subpath)
         path.mkdir(parents=True, exist_ok=True)
         return path

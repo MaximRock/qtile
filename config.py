@@ -1,3 +1,4 @@
+from logging import Logger
 import os
 
 import libqtile.resources
@@ -14,24 +15,29 @@ from settings.keys import create_group_keys, create_keys
 from settings.layouts import LayoutsManager
 from settings.theme_controller import ThemeController
 from settings.screens import ScreenManager
+from settings.behavior import BehaviorConfig
 from settings.mouse import load_mouse
-from settings.loger import get_logger
+from settings.logger import get_logger
 from constants import THEME_COLOR, MOD_KEY
+from settings.key_manager import get_keys
+from settings.floating import FloatingFactory
 
-logger = get_logger("qtile.qtile_startup", file="qtile_startup")
+
+logger: Logger = get_logger("qtile.qtile_startup", file="qtile_startup")
 logger.info("Qtile config started")
 
 
-THEME_COLOR = THEME_COLOR #"catppuccin"  # "gruvbox" ""
+THEME_COLOR = THEME_COLOR  # "catppuccin" "gruvbox"
 
 # kb = Keybindings(mod="mod1")
 # keys: list = kb.get()
 
-mod = MOD_KEY #"mod1"
+mod = MOD_KEY  # "mod1"
 terminal: str | None = guess_terminal()
 
-keys = []
-keys += create_keys(mod=mod, terminal=terminal)
+# keys: list = []
+# keys += create_keys(mod=mod, terminal=terminal)
+keys: list[Key] = get_keys(mod=mod, terminal=terminal)
 
 groups: list[Group] = create_gpups(config_groups=work())
 keys += create_group_keys(mod=mod, groups=groups)
@@ -39,19 +45,13 @@ keys += create_group_keys(mod=mod, groups=groups)
 tc = ThemeController(theme_color=THEME_COLOR)
 
 lm = LayoutsManager(theme_controller=tc)
-layouts = lm.get_layouts()
+layouts: list = lm.get_layouts()
 
 sm = ScreenManager(theme_controller=tc)
 
 screens: list[Screen] = sm.get_screens()
 
 mouse = load_mouse()
-
-
-
-# @hook.subscribe.startup_once
-# def start() -> None:
-#     Autostart().run()
 
 
 @hook.subscribe.startup_once
@@ -76,71 +76,33 @@ for vt in range(1, 8):
         )
     )
 
+behavior = BehaviorConfig()
+dgroups_key_binder: object = behavior.dgroups_key_binder
+dgroups_app_rules: list = behavior.dgroups_app_rules
+follow_mouse_focus: bool = behavior.follow_mouse_focus
+bring_front_click: bool = behavior.bring_front_click
+floats_kept_above: bool = behavior.floats_kept_above
+cursor_warp: bool = behavior.cursor_warp
 
+floating_config = FloatingFactory(tc).build()
 
+floating_layout = floating_config.get_layout()
 
-# # Drag floating layouts.
-# mouse = [
-#     Drag(
-#         [mod],
-#         "Button1",
-#         lazy.window.set_position_floating(),
-#         start=lazy.window.get_position(),
-#     ),
-#     Drag(
-#         [mod],
-#         "Button3",
-#         lazy.window.set_size_floating(),
-#         start=lazy.window.get_size(),
-#     ),
-#     Click([mod], "Button2", lazy.window.bring_to_front()),
-# ]
+# fc = FloatingConfig()
+# floating_layout = fc.get_floating_layout()
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
-bring_front_click = False
-floats_kept_above = True
-cursor_warp = False
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-        Match(title="tk"),
-    ]
-)
+auto_fullscreen: bool = behavior.auto_fullscreen
+focus_on_window_activation: str = behavior.focus_on_window_activation
+focus_previous_on_window_remove: bool = behavior.focus_previous_on_window_remove
+reconfigure_screens: bool = behavior.reconfigure_screens
 
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-focus_previous_on_window_remove = False
-reconfigure_screens = True
+auto_minimize: bool = behavior.auto_minimize
 
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
-auto_minimize = True
+wl_input_rules: object = behavior.wl_input_rules
+wl_xcursor_theme: object = behavior.wl_xcursor_theme
+wl_xcursor_size: int = behavior.wl_xcursor_size
 
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
-# xcursor theme (string or None) and size (integer) for Wayland backend
-wl_xcursor_theme = None
-wl_xcursor_size = 24
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname: str = behavior.wmname
 
 
 # groups = [Group(i) for i in "123456789"]
@@ -227,3 +189,41 @@ wmname = "LG3D"
 #         # x11_drag_polling_rate = 60,
 #     ),
 # ]
+
+
+# # Drag floating layouts.
+# mouse = [
+#     Drag(
+#         [mod],
+#         "Button1",
+#         lazy.window.set_position_floating(),
+#         start=lazy.window.get_position(),
+#     ),
+#     Drag(
+#         [mod],
+#         "Button3",
+#         lazy.window.set_size_floating(),
+#         start=lazy.window.get_size(),
+#     ),
+#     Click([mod], "Button2", lazy.window.bring_to_front()),
+# ]
+
+# dgroups_key_binder = None
+# dgroups_app_rules = []  # type: list
+# follow_mouse_focus = True
+# bring_front_click = False
+# floats_kept_above = True
+# cursor_warp = False
+# floating_layout = layout.Floating(
+#     float_rules=[
+#         # Run the utility of `xprop` to see the wm class and name of an X client.
+#         *layout.Floating.default_float_rules,
+#         Match(wm_class="confirmreset"),  # gitk
+#         Match(wm_class="makebranch"),  # gitk
+#         Match(wm_class="maketag"),  # gitk
+#         Match(wm_class="ssh-askpass"),  # ssh-askpass
+#         Match(title="branchdialog"),  # gitk
+#         Match(title="pinentry"),  # GPG key password entry
+#         Match(title="tk"),
+#     ]
+# )

@@ -7,11 +7,13 @@ qp = QtilePath()
 LOG_DIR: Path = qp.get("log")
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
-LOG_FILES = {
+LOG_FILES: dict[str, Path] = {
     "mouse": LOG_DIR / "mouse.log",
     "basefactory": LOG_DIR / "basefactory.log",
-    "default": LOG_DIR / "loger.log",
+    "default": LOG_DIR / "logger.log",
     "qtile_startup": LOG_DIR / "qtile_startup.log",
+    "behavior": LOG_DIR / "behavior.log",
+    "floating": LOG_DIR / "floating.log"
 }
 
 

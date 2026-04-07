@@ -1,0 +1,206 @@
+{
+  "keys": [
+    {
+      "desc": "Фокус вправо",
+      "modifiers": ["mod"],
+      "key": "l",
+      "command": "layout.right"
+    },
+    {
+      "desc": "Фокус влево",
+      "modifiers": ["mod"],
+      "key": "h",
+      "command": "layout.left"
+    },
+    {
+      "desc": "Фокус вниз",
+      "modifiers": ["mod"],
+      "key": "j",
+      "command": "layout.down"
+    },
+    {
+      "desc": "Фокус вверх",
+      "modifiers": ["mod"],
+      "key": "k",
+      "command": "layout.up"
+    },
+    {
+      "desc": "Следующее окно",
+      "modifiers": ["mod"],
+      "key": "w",
+      "command": "layout.next"
+    },
+    {
+      "desc": "Окно влево",
+      "modifiers": ["mod", "shift"],
+      "key": "h",
+      "command": "layout.shuffle_left"
+    },
+    {
+      "desc": "Окно вправо",
+      "modifiers": ["mod", "shift"],
+      "key": "l",
+      "command": "layout.shuffle_right"
+    },
+    {
+      "desc": "Окно вниз",
+      "modifiers": ["mod", "shift"],
+      "key": "j",
+      "command": "layout.shuffle_down"
+    },
+    {
+      "desc": "Окно вверх",
+      "modifiers": ["mod", "shift"],
+      "key": "k",
+      "command": "layout.shuffle_up"
+    },
+    {
+      "desc": "Расширить влево",
+      "modifiers": ["mod", "control"],
+      "key": "h",
+      "command": "layout.grow_left"
+    },
+    {
+      "desc": "Расширить вправо",
+      "modifiers": ["mod", "control"],
+      "key": "l",
+      "command": "layout.grow_right"
+    },
+    {
+      "desc": "Расширить вниз",
+      "modifiers": ["mod", "control"],
+      "key": "j",
+      "command": "layout.grow_down"
+    },
+    {
+      "desc": "Расширить вверх",
+      "modifiers": ["mod", "control"],
+      "key": "k",
+      "command": "layout.grow_up"
+    },
+    {
+      "desc": "Сброс размеров",
+      "modifiers": ["mod"],
+      "key": "n",
+      "command": "layout.normalize"
+    },
+    {
+      "desc": "Switch keyboard layout",
+      "modifiers": ["control", "shift"],
+      "key": "space",
+      "command": "widget.keyboardlayout.next_keyboard"
+    },
+    {
+      "desc": "Следующий layout",
+      "modifiers": ["mod"],
+      "key": "space",
+      "command": "next_layout"
+    },
+    {
+      "desc": "Терминал",
+      "modifiers": ["mod"],
+      "key": "Return",
+      "command": "spawn",
+      "args": "{{terminal}}"
+    },
+    {
+      "desc": "Закрыть окно",
+      "modifiers": ["mod"],
+      "key": "q",
+      "command": "window.kill"
+    },
+    {
+      "desc": "Полный экран",
+      "modifiers": ["mod"],
+      "key": "f",
+      "command": "window.toggle_fullscreen"
+    },
+    {
+      "desc": "Плавающее окно",
+      "modifiers": ["mod"],
+      "key": "t",
+      "command": "window.toggle_floating"
+    },
+    {
+      "desc": "Перезагрузка конфига",
+      "modifiers": ["mod", "control"],
+      "key": "r",
+      "command": "reload_config"
+    },
+    {
+      "desc": "Выход из Qtile",
+      "modifiers": ["mod", "control"],
+      "key": "q",
+      "command": "shutdown"
+    },
+    {
+      "desc": "Запуск команды",
+      "modifiers": ["mod"],
+      "key": "r",
+      "command": "spawncmd"
+    },
+    {
+      "desc": "Thunar Файловый менеджер",
+      "modifiers": ["mod"],
+      "key": "e",
+      "command": "spawn",
+      "args": "thunar"
+    },
+    {
+      "desc": "VsCode",
+      "modifiers": ["mod"],
+      "key": "c",
+      "command": "spawn",
+      "args": "code"
+    },
+    {
+      "desc": "Yazi Терминальный менеджер",
+      "modifiers": ["mod"],
+      "key": "z",
+      "command": "spawn",
+      "args": "wezterm start -- yazi"
+    },
+    {
+      "desc": "Яндекс браузер",
+      "modifiers": ["mod"],
+      "key": "b",
+      "command": "spawn",
+      "args": "yandex-browser-stable"
+    },
+    {
+      "desc": "запуск rofi",
+      "modifiers": ["mod"],
+      "key": "d",
+      "command": "spawn",
+      "args": "rofi -show drun"
+    },
+    {
+      "desc": "запуск rofi power-menu",
+      "modifiers": ["mod"],
+      "key": "p",
+      "command": "spawn",
+      "args": "rofi -show power-menu"
+    },
+    {
+      "desc": "захват с помощью графического интерфейса",
+      "modifiers": ["mod"],
+      "key": "o",
+      "command": "spawn",
+      "args": "flameshot gui"
+    },
+    {
+      "desc": "Полноэкранная съемка (с запросом пути сохранения)",
+      "modifiers": ["mod", "shift"],
+      "key": "o",
+      "command": "spawn",
+      "args": "flameshot full"
+    },
+    {
+      "desc": "Power menu",
+      "modifiers": [],
+      "key": "F12",
+      "command": "spawn",
+      "args": "/home/max/.config/qtile/modules/power_menu/main.py"
+    }
+  ]
+}

@@ -56,3 +56,21 @@ class ButtonWidgetsError(WidgetsError):
     """Ошибка в конфигурации button widget"""
 
     pass
+
+
+class LabelWidgetsError(WidgetsError):
+    """Ошибка в конфигурации label widget"""
+
+    pass
+
+
+class ImageWidgetsError(WidgetsError):
+    """Ошибка в конфигурации image widget"""
+
+    pass
+
+
+class FrameWidgetsError(WidgetsError):
+    """Ошибка в конфигурации frame widget"""
+
+    pass

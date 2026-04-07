@@ -13,8 +13,15 @@ config.py.backup.20260204_195229
 
 .vscode
 scr.py
+log/
 
 modules/power_menu/power_menu/main1.py
 modules/power_menu/power_menu/color.py
 
 command.txt
+
+11
+
+KODA.md
+QWEN.md
+.qwen/

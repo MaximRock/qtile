@@ -72,6 +72,31 @@
         }
     },
     {
+        "name": "PulseVolume",
+        "config": {
+            "font": "{font}",
+            "fontsize": "{fontsize}",
+            "foreground": "{foreground}",
+            "background": "{background}",
+            "padding": 10,
+            "limit_max_volume": true,
+            "mouse_callbacks": {
+                "Button1": "pavucontrol",
+                "Button4": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+                "Button5": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+            }
+        }
+    },
+    {
+        "name": "Sep",
+        "config": {
+            "linewidth": 1,
+            "foreground": "{separator_color}",
+            "padding": 10,
+            "size_percent": 80
+        }
+    },
+    {
         "name": "Spacer",
         "config": {}
     },
@@ -135,4 +160,5 @@
             "update_interval": 2.0
         }
     }
+
 ]
